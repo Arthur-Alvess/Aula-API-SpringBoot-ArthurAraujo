@@ -7,9 +7,9 @@ CREATE DATABASE estudo_pessoas
 --
 Use estudo_pessoas
 
-DROP TABLE IF EXISTS `table_name`;
+DROP TABLE IF EXISTS `Pessoas`;
 
-CREATE TABLE `table_name` (
+CREATE TABLE `Pessoas` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `create_time` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Create Time',
   `name` varchar(255) NOT NULL,
@@ -20,10 +20,19 @@ CREATE TABLE `table_name` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Cadastro de Pessoas';
 
 -- Inserção de dados de exemplo
-INSERT INTO table_name (name, telefone, endereco, imagem_perfil) VALUES
+INSERT INTO Pessoas (name, telefone, endereco, imagem_perfil) VALUES
 ('João Silva', '(31) 91234-5678', 'Rua das Flores, 123', 'https://imagem.com/perfil.png'),
 ('Maria Oliveira', '(31) 99887-1234', 'Avenida Central, 456', 'https://imagem.com/perfil2.png');
 
+
+CREATE TABLE `Produtos`(
+  `idProduct` bigint(20) NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(255) NOT NULL,
+  `price` DECIMAL(10,2) NOT NULL,
+  `quantidadeEstoque` INT NOT NULL,
+  `descricao` varchar(255),
+  PRIMARY KEY(`idProduct`)
+)
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
