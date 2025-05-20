@@ -1,8 +1,8 @@
-# Estudo de API REST - Cadastro de Pessoas
+# Estudo de API REST - Cadastro de Pessoas e Produtos
 
 ## 📌 **Descrição do Projeto**
 
-Projeto de uma API RESTful desenvolvida em Spring Boot com conexão MySQL. Esta aplicação permite o cadastro, consulta, atualização e remoção de registros de pessoas em um banco de dados relacional.
+Projeto de uma API RESTful desenvolvida em Spring Boot com conexão MySQL. Esta aplicação permite o cadastro, consulta, atualização e remoção de registros de **pessoas** e agora também de **produtos** em um banco de dados relacional.
 
 ---
 
@@ -19,27 +19,33 @@ Projeto de uma API RESTful desenvolvida em Spring Boot com conexão MySQL. Esta 
 
 ## 📂 **Estrutura de Pastas**
 
-```
 ├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── com.example.cadastro_pessoas
-│   │   │       ├── controller
-│   │   │       │   └── PessoasController.java
-│   │   │       ├── model
-│   │   │       │   └── PessoasModel.java
-│   │   │       ├── repository
-│   │   │       │   └── PessoasRepository.java
-│   │   │       └── servicer
-│   │   │           └── PessoasService.java
-│   │   └── resources
-│   │       ├── application.properties
-│   │       └── data.sql
+│ ├── main
+│ │ ├── java
+│ │ │ └── com.example.cadastro_pessoas
+│ │ │ ├── controller
+│ │ │ │ ├── PessoasController.java
+│ │ │ │ └── ProducctController.java
+│ │ │ ├── model
+│ │ │ │ ├── PessoasModel.java
+│ │ │ │ └── ProductModel.java
+│ │ │ ├── repository
+│ │ │ │ ├── PessoasRepository.java
+│ │ │ │ └── ProductRepository.java
+│ │ │ └── service
+│ │ │ ├── PessoasService.java
+│ │ │ └── ProductService.java
+│ │ └── resources
+│ │ ├── application.properties
+│ │ └── data.sql
 ├── db
-│   └── script.sql
+│ └── script.sql
 ├── pom.xml
 └── README.md
-```
+
+yaml
+Copiar
+Editar
 
 ---
 
@@ -56,106 +62,133 @@ Projeto de uma API RESTful desenvolvida em Spring Boot com conexão MySQL. Esta 
 1️⃣ Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/cadastro_pessoas.git
+  git clone https://github.com/Arthur-Alvess/cadastro_pessoas.git
 ```
-
 2️⃣ Acesse o diretório do projeto:
 
 ```bash
+Copiar
+Editar
 cd cadastro_pessoas
 ```
-
 3️⃣ Execute o Maven para baixar as dependências:
 
-```bash
+bash
+Copiar
+Editar
 mvn clean install
-```
-
 4️⃣ Configure o banco de dados MySQL:
 
-* Acesse o MySQL:
+Acesse o MySQL:
 
-```bash
+bash
+Copiar
+Editar
 mysql -u seu_usuario -p
-```
+Crie o banco:
 
-* Crie o banco:
-
-```sql
+sql
+Copiar
+Editar
 CREATE DATABASE estudo_pessoas;
 USE estudo_pessoas;
-```
+Rode o script para criar as tabelas:
 
-* Rode o script para criar a tabela:
-
-```sql
+sql
+Copiar
+Editar
 source db/script.sql;
-```
-
 5️⃣ Suba a aplicação Spring Boot:
 
-```bash
+bash
+Copiar
+Editar
 mvn spring-boot:run
-```
+A aplicação estará rodando em: http://localhost:8080
 
-A aplicação estará rodando em: `http://localhost:8080/api/pessoas`
+🔎 Testes da API
+Você pode utilizar o Hoppscotch para testar as rotas.
 
----
+📁 Pessoas
+GET → /api/pessoas
 
-## 🔎 **Testes da API**
+Lista todas as pessoas.
 
-Você pode utilizar o [Hoppscotch](https://hoppscotch.io/) para testar:
+GET → /api/pessoas/{id}
 
-**GET** → `/api/pessoas`
+Busca uma pessoa pelo ID.
 
-* Lista todas as pessoas.
+POST → /api/pessoas
 
-**GET** → `/api/pessoas/{id}`
-
-* Busca uma pessoa pelo ID.
-
-**POST** → `/api/pessoas`
-
-```json
+json
+Copiar
+Editar
 {
   "name": "João Silva",
   "telefone": "(31) 91234-5678",
   "endereco": "Rua das Flores, 123",
   "imagemPerfil": "https://imagem.com/perfil.png"
 }
-```
+PUT → /api/pessoas/{id}
 
-**PUT** → `/api/pessoas/{id}`
-
-```json
+json
+Copiar
+Editar
 {
   "name": "Maria Oliveira",
   "telefone": "(31) 99887-1234",
   "endereco": "Avenida Central, 456",
   "imagemPerfil": "https://imagem.com/perfil2.png"
 }
-```
+DELETE → /api/pessoas/{id}
 
-**DELETE** → `/api/pessoas/{id}`
+Remove a pessoa pelo ID.
 
-* Remove a pessoa pelo ID.
+📦 Produtos
+GET → /api/produtos
 
----
+Lista todos os produtos.
 
-## 📌 **Dicas Importantes**
+GET → /api/produtos/{id}
 
-* Caso queira popular automaticamente o banco ao iniciar o projeto, coloque seus inserts no arquivo `data.sql` dentro de `src/main/resources`.
-* Para visualizar as queries SQL no console, verifique se está habilitado em `application.properties`:
+Busca um produto pelo ID.
 
-```properties
+POST → /api/produtos
+
+json
+Copiar
+Editar
+{
+  "product_name": "Martelo",
+  "price": 10.20,
+  "quantEstoque": 10,
+  "description": "Para bater nas coisas"
+}
+PUT → /api/produtos/{id}
+
+json
+Copiar
+Editar
+{
+  "product_name": "Martelo de Borracha",
+  "price": 15.50,
+  "quantEstoque": 5,
+  "description": "Martelo com cabeça de borracha"
+}
+DELETE → /api/produtos/{id}
+
+Remove o produto pelo ID.
+
+📌 Dicas Importantes
+Caso queira popular automaticamente o banco ao iniciar o projeto, coloque seus INSERTs no arquivo data.sql dentro de src/main/resources.
+
+Para visualizar as queries SQL no console, adicione ao application.properties:
+
+properties
+Copiar
+Editar
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
-```
-
----
-
-## 👨‍🏫 **Autor**
-
-**Wellerson Ferreira de Carvalho**
-
-Projeto desenvolvido para estudo de Spring Boot e API RESTful.
+👨‍🎓 Autor do Fork
+Arthur Araujo
+GitHub: Arthur-Alvess
