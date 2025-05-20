@@ -1,5 +1,6 @@
 package com.example.cadastro_pessoas.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,9 +10,9 @@ import org.springframework.stereotype.Service;
 import com.example.cadastro_pessoas.model.ComprasModel;
 import com.example.cadastro_pessoas.repository.ComprasRepository;
 
-
 @Service
 public class ComprasService {
+
     @Autowired
     private ComprasRepository repository;
 
@@ -19,16 +20,22 @@ public class ComprasService {
         return repository.findAll();
     }
 
-    public Optional<ComprasModel> buscarPorId(Long id){
+    public Optional<ComprasModel> buscarPorId(long id){
         return repository.findById(id);
+
     }
 
-    public ComprasModel salvar(ComprasModel comprasModel){
+    public ComprasModel criar(ComprasModel comprasModel){
+        comprasModel.setDataCompra(LocalDateTime.now());
         return repository.save(comprasModel);
     }
+    
+    public ComprasModel atualizar(long id, ComprasModel comprasModel){
+        return repository.save(comprasModel);
+    }
+    
 
-    public void deletar(Long id){
+    public void deletar(long id){
         repository.deleteById(id);
     }
-  
 }
