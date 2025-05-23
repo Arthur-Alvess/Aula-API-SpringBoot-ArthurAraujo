@@ -59,6 +59,13 @@ public class ComprasController {
         comprasModel.setId(id);
         return ResponseEntity.ok(service.atualizar(id, comprasModel));
     }
+
+    @GetMapping("/pessoas/{id}")
+    public ResponseEntity<ComprasModel> busca(@PathVariable Long id) {
+        return service.buscarPorId(id)
+                .map(compra -> ResponseEntity.ok(compra))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
     
     
 }
